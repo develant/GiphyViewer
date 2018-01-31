@@ -12,6 +12,8 @@
 		FEB5ABAE2022536500133F4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABAC2022536500133F4A /* Main.storyboard */; };
 		FEB5ABB02022536500133F4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABAF2022536500133F4A /* Assets.xcassets */; };
 		FEB5ABB32022536500133F4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABB12022536500133F4A /* LaunchScreen.storyboard */; };
+		FEB5ABBB2022628400133F4A /* GiphyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5ABBA2022628400133F4A /* GiphyCell.swift */; };
+		FEB5ABBD2022638300133F4A /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5ABBC2022638300133F4A /* Colours.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		FEB5ABAF2022536500133F4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB5ABB22022536500133F4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEB5ABB42022536500133F4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEB5ABBA2022628400133F4A /* GiphyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCell.swift; sourceTree = "<group>"; };
+		FEB5ABBC2022638300133F4A /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 			children = (
 				FEB5ABA82022536500133F4A /* AppDelegate.swift */,
 				FEB5ABAA2022536500133F4A /* ViewController.swift */,
+				FEB5ABBC2022638300133F4A /* Colours.swift */,
 				FEB5ABAC2022536500133F4A /* Main.storyboard */,
+				FEB5ABBA2022628400133F4A /* GiphyCell.swift */,
 				FEB5ABAF2022536500133F4A /* Assets.xcassets */,
 				FEB5ABB12022536500133F4A /* LaunchScreen.storyboard */,
 				FEB5ABB42022536500133F4A /* Info.plist */,
@@ -138,6 +144,8 @@
 			files = (
 				FEB5ABAB2022536500133F4A /* ViewController.swift in Sources */,
 				FEB5ABA92022536500133F4A /* AppDelegate.swift in Sources */,
+				FEB5ABBB2022628400133F4A /* GiphyCell.swift in Sources */,
+				FEB5ABBD2022638300133F4A /* Colours.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +219,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -262,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -280,7 +288,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.develant.GiphyViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -295,7 +303,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.develant.GiphyViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
