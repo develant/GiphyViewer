@@ -12,7 +12,4 @@ class GiphyCell: UICollectionViewCell {
     
     @IBOutlet weak var giphyImageView: UIImageView!
     
-//    override func prepareForReuse() {
-//        giphyImageView.image = nil
-//    }
 }

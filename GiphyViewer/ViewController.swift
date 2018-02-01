@@ -12,8 +12,7 @@ import GiphySwift
 import Alamofire
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    //TASK: zagruzatj bolshe gifok, kogda provodish vniz
-    
+   
     @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -86,6 +85,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == arrayOfGifs.count - 1 {
+            requestGiphy(searchText: searchBar.text ?? nil)
+        }
+    }
+    
     func requestGiphy(searchText: String?) {
         if let searchText = searchText {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -95,7 +101,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         
                     case .success(result: let gifs, properties: _):
                         
-                    self.arrayOfGifs = gifs
+                        for gif in gifs {
+                            self.arrayOfGifs.append(gif)
+                        }
+                        
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                         }
@@ -111,13 +120,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 }
 
 extension ViewController: UISearchBarDelegate {
+    
+    func hideKeyboard() {
+        DispatchQueue.main.async {
+            self.searchBar.resignFirstResponder()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchBar.text?.count == 0 {
-            DispatchQueue.main.async {
-                //                self.collectionView?.reloadData()
-                searchBar.resignFirstResponder()
-            }
+            hideKeyboard()
         } else {
             requestGiphy(searchText: searchText)
         }
