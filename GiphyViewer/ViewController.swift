@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import GiphyCoreSDK
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    let client = GPHClient(apiKey: "GtpCmlGTbtuNSnCcNa94y1g6HWRVmABd")
     
     let colours = Colours()
     
