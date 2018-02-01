@@ -18,6 +18,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let client = GPHClient(apiKey: "GtpCmlGTbtuNSnCcNa94y1g6HWRVmABd")
     
     let colours = Colours()
+    var giphyArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return giphyArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -75,7 +76,37 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 }
 
 extension ViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+            self.startSearchingGiphy(text: searchText)
+        }
+     
+        startSearchingGiphy(text: searchText)
+    }
+    
+    func startSearchingGiphy(text: String) {
+        
+        client.search(text) { (response, error) in
+            
+            if let error = error as NSError? {
+                print("Error to search giphy \(error)")
+            }
+//            let pagination = response.pagination
+            if let response = response, let data = response.data {
+                //w320 -h200
+                for result in data {
+                    if let giphyUrlString = result.images?.fixedHeight?.gifUrl {
+                        self.giphyArray.append(giphyUrlString)
+                    }
+                }
+            } else {
+                print("No results found")
+            }
+        }
+//        gifCollectionView.reloadData()
         
     }
 }
