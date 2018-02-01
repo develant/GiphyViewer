@@ -1,102 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ryW-05-3tI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
-    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Collection View Controller-->
+        <scene sceneID="Dgl-bZ-hyn">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GiphyViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <collectionViewController id="ryW-05-3tI" customClass="CollectionViewController" customModule="GiphyViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vb7-oH-hrE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giphy Viewer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObM-Fn-pMA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="IQc-TQ-T9F"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1LK-Ub-rti">
-                                <rect key="frame" x="0.0" y="50" width="375" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="kpQ-5M-gea"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3Vb-Qf-lE3">
-                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FhQ-fM-h53">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="dWk-SV-tWL" customClass="GiphyCell" customModule="GiphyViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qpq-wM-Lw7">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Ayc-qz-9Dc" customClass="GiphyCell" customModule="GiphyViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ra0-Gr-QEE">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PyP-CC-IZJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="PyP-CC-IZJ" secondAttribute="bottom" id="Auo-Vm-mWD"/>
-                                            <constraint firstItem="PyP-CC-IZJ" firstAttribute="top" secondItem="dWk-SV-tWL" secondAttribute="top" id="EyS-qT-RbE"/>
-                                            <constraint firstItem="PyP-CC-IZJ" firstAttribute="leading" secondItem="dWk-SV-tWL" secondAttribute="leading" id="ILr-iG-5jv"/>
-                                            <constraint firstAttribute="trailing" secondItem="PyP-CC-IZJ" secondAttribute="trailing" id="n7j-hI-fid"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="giphyImageView" destination="PyP-CC-IZJ" id="hyN-rc-P0N"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="1LK-Ub-rti" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2fg-6C-6uM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ObM-Fn-pMA" secondAttribute="trailing" id="2w1-Mb-7KU"/>
-                            <constraint firstItem="3Vb-Qf-lE3" firstAttribute="top" secondItem="1LK-Ub-rti" secondAttribute="bottom" id="3GO-q4-Qey"/>
-                            <constraint firstItem="1LK-Ub-rti" firstAttribute="top" secondItem="ObM-Fn-pMA" secondAttribute="bottom" id="Wum-7C-7HZ"/>
-                            <constraint firstItem="ObM-Fn-pMA" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Xvi-Mx-l3U"/>
-                            <constraint firstAttribute="trailing" secondItem="1LK-Ub-rti" secondAttribute="trailing" id="bRq-dC-71a"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3Vb-Qf-lE3" secondAttribute="bottom" id="bU8-eR-tCb"/>
-                            <constraint firstItem="3Vb-Qf-lE3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jON-bg-7bb"/>
-                            <constraint firstItem="ObM-Fn-pMA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kCf-Us-10F"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3Vb-Qf-lE3" secondAttribute="trailing" id="y1b-wd-nTa"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="3Vb-Qf-lE3" id="DF1-mP-1n5"/>
-                        <outlet property="searchBar" destination="1LK-Ub-rti" id="Vmv-0o-NdM"/>
-                        <outlet property="titleLabel" destination="ObM-Fn-pMA" id="LqV-d5-ySu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ra0-Gr-QEE" secondAttribute="bottom" id="7nt-9D-wAl"/>
+                                    <constraint firstItem="Ra0-Gr-QEE" firstAttribute="leading" secondItem="Ayc-qz-9Dc" secondAttribute="leading" id="IpU-3n-SVH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ra0-Gr-QEE" secondAttribute="trailing" id="XCo-sn-d8b"/>
+                                    <constraint firstItem="Ra0-Gr-QEE" firstAttribute="top" secondItem="Ayc-qz-9Dc" secondAttribute="top" id="gz7-ZB-Ksi"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="giphyImageView" destination="Ra0-Gr-QEE" id="hC2-Mi-bEe"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="t7q-8w-CvR">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="ryW-05-3tI" id="KvN-Ka-Ff1"/>
+                            <outlet property="delegate" destination="ryW-05-3tI" id="EJt-9m-QsP"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afy-ns-QTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="111" y="125"/>
         </scene>
     </scenes>
 </document>
