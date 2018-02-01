@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.swift
+//  ViewController.swift
 //  GiphyViewer
 //
 //  Created by Antons Aleksandrovs on 31/01/2018.
@@ -11,17 +11,23 @@ import SwiftyGif
 import GiphySwift
 import Alamofire
 
-class CollectionViewController: UICollectionViewController {
-
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    //TASK: zagruzatj bolshe gifok, kogda provodish vniz
+    
+    @IBOutlet weak var appNameLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     let colours = Colours()
     let gifManager = SwiftyGifManager(memoryLimit: 20)
     
     var arrayOfGifs = [GiphyImageResult]()
     
-    let searchBar = UISearchBar()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         searchBar.delegate = self
     }
 
@@ -30,12 +36,15 @@ class CollectionViewController: UICollectionViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
+        appNameLabel.backgroundColor = colours.lighGreen
+        appNameLabel.textColor = colours.darkGreen
+        searchBar.barTintColor = colours.lighGreen
         requestGiphy(searchText: nil)
         setupCollectionViewCells()
     }
 
     func setupCollectionViewCells() {
+        
         let layout = UICollectionViewFlowLayout()
         let screenWidth = UIScreen.main.bounds.width
         
@@ -49,45 +58,32 @@ class CollectionViewController: UICollectionViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         
-        layout.headerReferenceSize = CGSize(width: view.frame.size.width, height: 40)
-        
-        collectionView?.collectionViewLayout = layout
+        collectionView.collectionViewLayout = layout
     }
     
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayOfGifs.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? GiphyCell else {
             fatalError()
         }
         
         let image = arrayOfGifs[indexPath.row]
-        let url = URL(string: image.images.fixedHeight.downsampled.gif.url)!
-        
-        Alamofire.request(url).responseData { (response) in
-            guard let data = response.result.value else {
-                return
-            }
+        if let url = URL(string: image.images.fixedHeight.downsampled.gif.url) {
             
-            let newGiphy = UIImage(gifData: data, levelOfIntegrity: 0.5)
-            cell.giphyImageView.setGifImage(newGiphy, manager: self.gifManager)
+            Alamofire.request(url).responseData { (response) in
+                guard let data = response.result.value else {
+                    return
+                }
+            
+                let newGiphy = UIImage(gifData: data, levelOfIntegrity: 0.5)
+                cell.giphyImageView.setGifImage(newGiphy, manager: self.gifManager)
+            }
         }
-        
         return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionElementKindSectionHeader else {
-            return UICollectionReusableView()
-        }
-        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", for: indexPath)
-        reusableView.addSubview(searchBar)
-        searchBar.sizeToFit()
-        return reusableView
     }
 
     func requestGiphy(searchText: String?) {
@@ -101,7 +97,7 @@ class CollectionViewController: UICollectionViewController {
                         
                     self.arrayOfGifs = gifs
                     DispatchQueue.main.async {
-                        self.collectionView?.reloadData()
+                        self.collectionView.reloadData()
                         }
                         
                     case .error(let error):
@@ -114,7 +110,7 @@ class CollectionViewController: UICollectionViewController {
     }
 }
 
-extension CollectionViewController: UISearchBarDelegate {
+extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchBar.text?.count == 0 {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		023E2DAF8ED341FC6AB927D5 /* Pods_GiphyViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255327F4D3DC983B1C7B1365 /* Pods_GiphyViewer.framework */; };
 		FEB5ABA92022536500133F4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5ABA82022536500133F4A /* AppDelegate.swift */; };
-		FEB5ABAB2022536500133F4A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5ABAA2022536500133F4A /* CollectionViewController.swift */; };
+		FEB5ABAB2022536500133F4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5ABAA2022536500133F4A /* ViewController.swift */; };
 		FEB5ABAE2022536500133F4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABAC2022536500133F4A /* Main.storyboard */; };
 		FEB5ABB02022536500133F4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABAF2022536500133F4A /* Assets.xcassets */; };
 		FEB5ABB32022536500133F4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB5ABB12022536500133F4A /* LaunchScreen.storyboard */; };
@@ -23,7 +23,7 @@
 		F3A498C0AB917D5EAE05EC39 /* Pods-GiphyViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-GiphyViewer/Pods-GiphyViewer.release.xcconfig"; sourceTree = "<group>"; };
 		FEB5ABA52022536500133F4A /* GiphyViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiphyViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB5ABA82022536500133F4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FEB5ABAA2022536500133F4A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		FEB5ABAA2022536500133F4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FEB5ABAD2022536500133F4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FEB5ABAF2022536500133F4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB5ABB22022536500133F4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				FEB5ABA82022536500133F4A /* AppDelegate.swift */,
-				FEB5ABAA2022536500133F4A /* CollectionViewController.swift */,
+				FEB5ABAA2022536500133F4A /* ViewController.swift */,
 				FEB5ABBC2022638300133F4A /* Colours.swift */,
 				FEB5ABAC2022536500133F4A /* Main.storyboard */,
 				FEB5ABBA2022628400133F4A /* GiphyCell.swift */,
@@ -129,6 +129,7 @@
 				TargetAttributes = {
 					FEB5ABA42022536500133F4A = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -227,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEB5ABAB2022536500133F4A /* CollectionViewController.swift in Sources */,
+				FEB5ABAB2022536500133F4A /* ViewController.swift in Sources */,
 				FEB5ABA92022536500133F4A /* AppDelegate.swift in Sources */,
 				FEB5ABBB2022628400133F4A /* GiphyCell.swift in Sources */,
 				FEB5ABBD2022638300133F4A /* Colours.swift in Sources */,
