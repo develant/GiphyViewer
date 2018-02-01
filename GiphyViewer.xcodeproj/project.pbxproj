@@ -85,10 +85,10 @@
 				FEB5ABA82022536500133F4A /* AppDelegate.swift */,
 				FEB5ABAA2022536500133F4A /* ViewController.swift */,
 				FEB5ABBC2022638300133F4A /* Colours.swift */,
-				FEB5ABAC2022536500133F4A /* Main.storyboard */,
 				FEB5ABBA2022628400133F4A /* GiphyCell.swift */,
-				FEB5ABAF2022536500133F4A /* Assets.xcassets */,
+				FEB5ABAC2022536500133F4A /* Main.storyboard */,
 				FEB5ABB12022536500133F4A /* LaunchScreen.storyboard */,
+				FEB5ABAF2022536500133F4A /* Assets.xcassets */,
 				FEB5ABB42022536500133F4A /* Info.plist */,
 			);
 			path = GiphyViewer;

@@ -28,6 +28,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +44,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         searchBar.barTintColor = colours.lighGreen
         requestGiphy(searchText: nil)
         setupCollectionViewCells()
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     func setupCollectionViewCells() {
@@ -87,7 +95,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == arrayOfGifs.count - 1 {
+        if indexPath.row == arrayOfGifs.count - 3 {
             requestGiphy(searchText: searchBar.text ?? nil)
         }
     }
@@ -132,11 +140,13 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         if searchBar.text?.count == 0 {
             hideKeyboard()
         } else {
+            arrayOfGifs = []
             requestGiphy(searchText: searchText)
         }
     }
+    
 }
