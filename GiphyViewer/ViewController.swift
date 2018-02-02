@@ -29,7 +29,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.dataSource = self
         searchBar.delegate = self
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tap)
         
     }
@@ -39,23 +39,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         appNameLabel.backgroundColor = colours.lighGreen
         appNameLabel.textColor = colours.darkGreen
         searchBar.barTintColor = colours.lighGreen
         requestGiphy(searchText: nil)
         setupCollectionViewCells()
     }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
 
     func setupCollectionViewCells() {
         
         let layout = UICollectionViewFlowLayout()
         let screenWidth = UIScreen.main.bounds.width
-        
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         
         let padding: CGFloat = 10
         let itemWidth = screenWidth/3 - padding
@@ -75,19 +70,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? GiphyCell else {
-            fatalError()
+            fatalError("Error dequeue cell")
         }
         
         let image = arrayOfGifs[indexPath.row]
         if let url = URL(string: image.images.fixedHeight.downsampled.gif.url) {
             
             Alamofire.request(url).responseData { (response) in
-                guard let data = response.result.value else {
-                    return
+
+                if let data = response.result.value {
+                    let newGiphy = UIImage(gifData: data, levelOfIntegrity: 0.5)
+                    cell.giphyImageView.setGifImage(newGiphy, manager: self.gifManager)
                 }
-            
-                let newGiphy = UIImage(gifData: data, levelOfIntegrity: 0.5)
-                cell.giphyImageView.setGifImage(newGiphy, manager: self.gifManager)
             }
         }
         return cell
@@ -102,27 +96,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func requestGiphy(searchText: String?) {
         if let searchText = searchText {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                Giphy.Gif.request(.search(searchText), completionHandler: { (result) in
+            Giphy.Gif.request(.search(searchText), completionHandler: { (result) in
+                
+                switch result {
+                case .success(result: let gifs, properties: _):
                     
-                    switch result {
-                        
-                    case .success(result: let gifs, properties: _):
-                        
-                        for gif in gifs {
-                            self.arrayOfGifs.append(gif)
-                        }
-                        
+                    for gif in gifs {
+                        self.arrayOfGifs.append(gif)
+                    }
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
-                        }
-                        
-                    case .error(let error):
-                        print(error)
-                        
                     }
-                })
-            }
+                case .error(let error):
+                    print(error)
+                }
+            })
         }
     }
 }
@@ -139,14 +127,14 @@ extension ViewController: UISearchBarDelegate {
         hideKeyboard()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        if searchBar.text?.count == 0 {
-            hideKeyboard()
-        } else {
-            arrayOfGifs = []
-            requestGiphy(searchText: searchText)
-        }
+    func prepareForRequest() {
+        self.arrayOfGifs = []
+        self.requestGiphy(searchText: searchBar.text)
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.prepareForRequest), object: nil)
+        self.perform(#selector(self.prepareForRequest), with: nil, afterDelay: 0.5)
+    }
 }
