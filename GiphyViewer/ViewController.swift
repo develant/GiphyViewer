@@ -19,7 +19,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let colours = Colours()
     let gifManager = SwiftyGifManager(memoryLimit: 20)
-    
+    var offset = 1
     var arrayOfGifs = [GiphyImageResult]()
     
     override func viewDidLoad() {
@@ -55,11 +55,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let padding: CGFloat = 10
         let itemWidth = screenWidth/3 - padding
         let itemHeight = screenWidth/3 - padding
-        
+
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        
+
         collectionView.collectionViewLayout = layout
     }
     
@@ -89,21 +89,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == arrayOfGifs.count - 3 {
+        if indexPath.row == arrayOfGifs.count - 1 {
+            offset += 25
             requestGiphy(searchText: searchBar.text ?? nil)
         }
     }
     
     func requestGiphy(searchText: String?) {
         if let searchText = searchText {
-            Giphy.Gif.request(.search(searchText), completionHandler: { (result) in
-                
+            
+    Giphy.Gif.request(.search(searchText), limit: 25, offset: offset, completionHandler: { (result) in
+ 
                 switch result {
                 case .success(result: let gifs, properties: _):
                     
                     for gif in gifs {
                         self.arrayOfGifs.append(gif)
                     }
+                   
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                     }
@@ -128,13 +131,14 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func prepareForRequest() {
-        self.arrayOfGifs = []
-        self.requestGiphy(searchText: searchBar.text)
+        arrayOfGifs = []
+        offset = 1
+        requestGiphy(searchText: searchBar.text)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.prepareForRequest), object: nil)
-        self.perform(#selector(self.prepareForRequest), with: nil, afterDelay: 0.5)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(prepareForRequest), object: nil)
+        perform(#selector(prepareForRequest), with: nil, afterDelay: 0.5)
     }
 }
