@@ -17,9 +17,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     let colours = Colours()
-    var giphyArray = [String]()
+    let gifManager = SwiftyGifManager(memoryLimit: 20)
+    var offset = 1
+    var arrayOfGifs = [GiphyImageResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return giphyArray.count
+        return arrayOfGifs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,20 +120,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
 extension ViewController: UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            
-            self.startSearchingGiphy(text: searchText)
+    func hideKeyboard() {
+        DispatchQueue.main.async {
+            self.searchBar.resignFirstResponder()
         }
-     
-        startSearchingGiphy(text: searchText)
     }
     
-    func startSearchingGiphy(text: String) {
-        
- 
-
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+    }
+    
+    func prepareForRequest() {
+        arrayOfGifs = []
+        offset = 1
+        requestGiphy(searchText: searchBar.text)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(prepareForRequest), object: nil)
         perform(#selector(prepareForRequest), with: nil, afterDelay: 0.5)
