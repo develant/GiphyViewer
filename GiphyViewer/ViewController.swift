@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GiphyCoreSDK
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
@@ -15,7 +14,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let client = GPHClient(apiKey: "GtpCmlGTbtuNSnCcNa94y1g6HWRVmABd")
     
     let colours = Colours()
     var giphyArray = [String]()
@@ -89,24 +87,8 @@ extension ViewController: UISearchBarDelegate {
     
     func startSearchingGiphy(text: String) {
         
-        client.search(text) { (response, error) in
-            
-            if let error = error as NSError? {
-                print("Error to search giphy \(error)")
-            }
-//            let pagination = response.pagination
-            if let response = response, let data = response.data {
-                //w320 -h200
-                for result in data {
-                    if let giphyUrlString = result.images?.fixedHeight?.gifUrl {
-                        self.giphyArray.append(giphyUrlString)
-                    }
-                }
-            } else {
-                print("No results found")
-            }
-        }
-//        gifCollectionView.reloadData()
+ 
+
         
     }
 }
